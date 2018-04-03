@@ -12,21 +12,61 @@
       </ul>
     </nav>
     <ul class="tab">
-      <li v-for="i in [0,1,2,3,4,5]"
-          v-bind:class="{active:currentTab === i}" v-text="`Tab${i + 1}`">
-
+      <!--<li v-for="i in [0,1,2,3,4,5]"-->
+      <!--v-bind:class="{active:currentTab === i}" v-text="`Tab${i + 1}`">-->
+      <!---->
+      <!--</li>-->
+      <li v-bind:class="{active:currentTab === 0}">
+        <h1>个人信息</h1>
+        <EditorProfile v-bind:profile="profile"/>
       </li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li v-bind:class="{active:currentTab === 4}">
+        <h1>工作经历</h1>
+        <EditorWork v-bind:workHistory="workHistory"/>
+      </li>
+      <li></li>
     </ul>
   </div>
 </template>
 
 <script>
+  import EditorProfile from './EditorProfile'
+  import EditorWork from './EditorWork'
+
   export default {
+    components: {
+      EditorProfile,
+      EditorWork
+    },
     data() {
       return {
         currentTab: 0,
+        profile: {
+          name: '',
+          job: '',
+          phone: '',
+          email: '',
+          wechat: '',
+          qq: '',
+          blog: '',
+          github: ''
+        },
+        workHistory: [
+          {company: '', position: '', time: '', content: ''}
+        ],
         icon: ['#icon-shenfenzheng', '#icon-tool', '#icon-heart', '#icon-jiangbei', '#icon-work_table', '#icon-xueli']
       }
+    },
+    created() {
+      setTimeout(() => {
+        console.log(this.profile)
+      }, 10000)
+    },
+    methods: {
+
     }
   }
 </script>
@@ -61,12 +101,48 @@
       }
     }
 
-    .tab > li {
-      display: none;
-    }
+    .tab {
+      padding: 0 24px;
+      flex-grow: 1;
+      overflow: auto;
 
-    .tab > li.active {
-      display: block;
+      > li {
+        display: none;
+
+        h1 {
+          margin: 20px 0 24px 0;
+          color: #FFF;
+        }
+
+        h3 {
+          margin-bottom: 10px;
+
+          > span {
+            padding: 0 10px;
+            font-family: 'Vani';
+            color: #E23150;
+          }
+
+          > .el-icon-circle-close {
+            color: white;
+            margin-left: 260px;
+            transition: all .3s;
+            cursor: pointer;
+          }
+
+          > .el-icon-circle-close:hover {
+            color: #E23150;
+          }
+        }
+
+        hr {
+          border-color: #E23150;
+        }
+      }
+
+      li.active {
+        display: block;
+      }
     }
 
   }

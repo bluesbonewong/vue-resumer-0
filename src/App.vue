@@ -43,7 +43,7 @@
     flex: 1;
 
     > .editor {
-      width: 30em;
+      width: 35em;
     }
     > .preview {
       flex: 1;
