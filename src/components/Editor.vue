@@ -20,26 +20,32 @@
         <h1>个人信息</h1>
         <EditorProfile v-bind:profile="profile"/>
       </li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li v-bind:class="{active:currentTab === 1}">
+        <h1>技能描述</h1>
+        <EditorItems v-bind:items="workHistory" v-bind:itemsLabel="workLabels"/>
+      </li>
+      <li v-bind:class="{active:currentTab === 2}"></li>
+      <li v-bind:class="{active:currentTab === 3}"></li>
       <li v-bind:class="{active:currentTab === 4}">
         <h1>工作经历</h1>
-        <EditorWork v-bind:workHistory="workHistory"/>
+        <EditorItems v-bind:items="workHistory" v-bind:itemsLabel="workLabels"/>
       </li>
-      <li></li>
+      <li v-bind:class="{active:currentTab === 5}">
+        <h1>教育经历</h1>
+        <EditorItems v-bind:items="eduHistory" v-bind:itemsLabel="eduLabels"/>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
   import EditorProfile from './EditorProfile'
-  import EditorWork from './EditorWork'
+  import EditorItems from './EditorItems'
 
   export default {
     components: {
       EditorProfile,
-      EditorWork
+      EditorItems,
     },
     data() {
       return {
@@ -57,16 +63,13 @@
         workHistory: [
           {company: '', position: '', time: '', content: ''}
         ],
+        workLabels: ['公司', '职位', '在职时间', '工作内容'],
+        eduHistory: [
+          {school: '', time: '', job: '', honor: '', societyExperience: ''}
+        ],
+        eduLabels: ['学校', '在校时间', '学生干部', '获得荣誉', '社会实践'],
         icon: ['#icon-shenfenzheng', '#icon-tool', '#icon-heart', '#icon-jiangbei', '#icon-work_table', '#icon-xueli']
       }
-    },
-    created() {
-      setTimeout(() => {
-        console.log(this.profile)
-      }, 10000)
-    },
-    methods: {
-
     }
   }
 </script>
