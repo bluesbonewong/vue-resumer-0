@@ -10,8 +10,8 @@
         <p>sume</p></a>
     </div>
     <el-row class="actions">
-      <el-button type="primary">注册</el-button>
-      <el-button type="primary" plain>登录</el-button>
+      <el-button type="primary" @click="signUp">注册</el-button>
+      <el-button type="primary" plain @click="login">登录</el-button>
       <el-button plain @click="preview">进行预览</el-button>
       <el-button plain @click="exitPreview">退出预览</el-button>
     </el-row>
@@ -22,10 +22,20 @@
   export default {
     methods: {
       preview() {
+        // 预览功能
         this.$emit('preview')
       },
-      exitPreview(){
+      exitPreview() {
+        // 退出预览功能
         this.$emit('exitPreview')
+      },
+      signUp() {
+        //
+        this.$emit('signUp')
+      },
+      login() {
+        //
+        this.$emit('login')
       }
     }
   }
