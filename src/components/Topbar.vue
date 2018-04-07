@@ -12,9 +12,24 @@
     <el-row class="actions">
       <el-button type="primary">注册</el-button>
       <el-button type="primary" plain>登录</el-button>
+      <el-button plain @click="preview">进行预览</el-button>
+      <el-button plain @click="exitPreview">退出预览</el-button>
     </el-row>
   </div>
 </template>
+
+<script>
+  export default {
+    methods: {
+      preview() {
+        this.$emit('preview')
+      },
+      exitPreview(){
+        this.$emit('exitPreview')
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   $topicColor: #F5C343;

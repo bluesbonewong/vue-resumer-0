@@ -7,11 +7,12 @@
         </h3>
         <hr>
         <el-form-item v-for="(key,index) in itemsKeys" v-bind:label="itemsLabel[index]" v-bind:key="index">
-          <el-input v-model="item[key]"></el-input>
+          <el-input v-model="item[key]" v-bind:type="itemsInputType[index]" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
         </el-form-item>
         <div style="margin: 20px;overflow: hidden;"></div>
       </div>
-      <el-button style="width: 100%;margin-bottom: 24px;" type="primary" @click="addItem">新增经历
+      <el-button style="width: 100%;margin-bottom: 24px;" type="primary" @click="addItem">
+        新增一项
       </el-button>
     </el-form>
   </div>
@@ -19,7 +20,7 @@
 
 <script>
   export default {
-    props: ['items', 'itemsLabel'],
+    props: ['items', 'itemsLabel', 'itemsInputType'],
     computed: {
       itemsKeys() {
         // items的key名
@@ -46,10 +47,10 @@
       open() {
         this.$message({
           showClose: true,
-          message: '请至少保留一项经历哟',
+          message: '请至少保留一项哟',
           type: 'error',
           center: true
-        });
+        })
       },
     }
   }

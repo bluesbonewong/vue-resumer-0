@@ -2,7 +2,7 @@
   <div id="editor">
     <nav>
       <ul>
-        <li v-for="i in [0,1,2,3,4,5]"
+        <li v-for="i in [0,1,2,3,4]"
             v-bind:class="{active:currentTab === i}"
             @click="currentTab = i">
           <svg class="icon">
@@ -18,21 +18,26 @@
       <!--</li>-->
       <li v-bind:class="{active:currentTab === 0}">
         <h1>个人信息</h1>
-        <EditorProfile v-bind:profile="profile"/>
+        <EditorProfile v-bind:profile="resume.profile"/>
       </li>
       <li v-bind:class="{active:currentTab === 1}">
         <h1>技能描述</h1>
-        <EditorItems v-bind:items="workHistory" v-bind:itemsLabel="workLabels"/>
+        <EditorItems v-bind:items="resume.skillHistory" v-bind:itemsLabel="resume.skillLabels" v-bind:itemsInputType="resume.skillInputType"/>
       </li>
-      <li v-bind:class="{active:currentTab === 2}"></li>
-      <li v-bind:class="{active:currentTab === 3}"></li>
-      <li v-bind:class="{active:currentTab === 4}">
+      <li v-bind:class="{active:currentTab === 2}">
+        <h1>项目描述</h1>
+        <EditorItems v-bind:items="resume.projectHistory" v-bind:itemsLabel="resume.projectLabels" v-bind:itemsInputType="resume.projectInputType"/>
+      </li>
+      <li v-bind:class="{active:currentTab === 3}">
         <h1>工作经历</h1>
-        <EditorItems v-bind:items="workHistory" v-bind:itemsLabel="workLabels"/>
+        <EditorItems v-bind:items="resume.workHistory" v-bind:itemsLabel="resume.workLabels" v-bind:itemsInputType="resume.workInputType"/>
+      </li>
+      <li v-bind:class="{active:currentTab === 4}">
+        <h1>教育经历</h1>
+        <EditorItems v-bind:items="resume.eduHistory" v-bind:itemsLabel="resume.eduLabels" v-bind:itemsInputType="resume.eduInputType"/>
       </li>
       <li v-bind:class="{active:currentTab === 5}">
-        <h1>教育经历</h1>
-        <EditorItems v-bind:items="eduHistory" v-bind:itemsLabel="eduLabels"/>
+
       </li>
     </ul>
   </div>
@@ -43,6 +48,7 @@
   import EditorItems from './EditorItems'
 
   export default {
+    props: ['resume'],
     components: {
       EditorProfile,
       EditorItems,
@@ -50,25 +56,7 @@
     data() {
       return {
         currentTab: 0,
-        profile: {
-          name: '',
-          job: '',
-          phone: '',
-          email: '',
-          wechat: '',
-          qq: '',
-          blog: '',
-          github: ''
-        },
-        workHistory: [
-          {company: '', position: '', time: '', content: ''}
-        ],
-        workLabels: ['公司', '职位', '在职时间', '工作内容'],
-        eduHistory: [
-          {school: '', time: '', job: '', honor: '', societyExperience: ''}
-        ],
-        eduLabels: ['学校', '在校时间', '学生干部', '获得荣誉', '社会实践'],
-        icon: ['#icon-shenfenzheng', '#icon-tool', '#icon-heart', '#icon-jiangbei', '#icon-work_table', '#icon-xueli']
+        icon: ['#icon-shenfenzheng', '#icon-tool', '#icon-jiangbei', '#icon-work_table', '#icon-xueli', '#icon-heart']
       }
     }
   }

@@ -7,11 +7,23 @@
     </el-radio-group>
     <div style="margin: 20px;"></div>
     <el-form v-show="labelPosition === 'top'">
+      <el-form-item label="照片链接">
+        <el-input v-model="profile.photoLink"></el-input>
+      </el-form-item>
       <el-form-item label="姓名">
         <el-input v-model="profile.name"></el-input>
       </el-form-item>
       <el-form-item label="应聘工作">
         <el-input v-model="profile.job"></el-input>
+      </el-form-item>
+      <el-form-item label="个人年龄">
+        <el-input v-model="profile.age"></el-input>
+      </el-form-item>
+      <el-form-item label="学历">
+        <el-input v-model="profile.edubg"></el-input>
+      </el-form-item>
+      <el-form-item label="毕业院校">
+        <el-input v-model="profile.college"></el-input>
       </el-form-item>
     </el-form>
     <el-form v-show="labelPosition === 'right'">
