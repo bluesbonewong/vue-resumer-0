@@ -6,7 +6,7 @@
           <use xlink:href="#icon-list"></use>
         </svg>
       </a>
-      <a href="#"><p>BoRe</p>
+      <a href="https://github.com/bluesbonewong/vue-resumer-0"><p>BoRe</p>
         <p>sume</p></a>
     </div>
     <el-row class="actions">
