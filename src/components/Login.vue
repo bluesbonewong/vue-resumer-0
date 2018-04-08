@@ -3,12 +3,13 @@
     <form class="form" v-on:submit.prevent=login>
       <div class="formRow"><input type="text" placeholder="用户名" v-model="formData.userName"></div>
       <div class="formRow"><input type="password" placeholder="密码" v-model="formData.password"></div>
-      <div class="formActions"><input type="submit" value="登录" @click="exitUp"></div>
+      <div class="formActions"><input type="submit" value="登录"></div>
     </form>
   </div>
 </template>
 
 <script>
+  import AV from 'leancloud-storage'
 
   export default {
     data() {
@@ -19,9 +20,18 @@
         }
       }
     },
-    methods:{
-      exitUp(){
-        this.$emit('exitUp')
+    methods: {
+      login() {
+        AV.User.logIn(this.formData.userName, this.formData.password).then((loginedUser) => {
+          console.log(loginedUser)
+          // 如果登录成功
+          // 触发exitUp事件，更改App.vue组件的数据
+          this.$emit('exitUp')
+          // 触发successInLean事件
+          this.$emit('successInLean')
+        }, function (error) {
+          alert('登录失败')
+        })
       }
     }
   }
@@ -37,7 +47,6 @@
     .form {
       padding: 20px;
       box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, .2);
-
 
       .formRow {
         > input {

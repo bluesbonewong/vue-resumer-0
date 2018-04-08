@@ -3,12 +3,21 @@
     <form class="form" v-on:submit.prevent=signUp>
       <div class="formRow"><input type="text" placeholder="用户名" v-model="formData.userName"></div>
       <div class="formRow"><input type="password" placeholder="密码" v-model="formData.password"></div>
-      <div class="formActions"><input type="submit" value="注册" @click="exitUp"></div>
+      <div class="formActions"><input type="submit" value="注册"></div>
     </form>
   </div>
 </template>
 
 <script>
+  import AV from 'leancloud-storage'
+
+  let APP_ID = 'iNIcbsMYCcmXztEdL91zshMK-gzGzoHsz'
+  let APP_KEY = 'ETz7LskzcSKrc8Vga1FYqyED'
+  AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+  })
+
   export default {
     data() {
       return {
@@ -18,9 +27,24 @@
         }
       }
     },
-    methods:{
-      exitUp(){
-        this.$emit('exitUp')
+    methods: {
+      signUp() {
+        // 新建 AVUser 对象实例
+        let user = new AV.User()
+        // 设置用户名
+        user.setUsername(this.formData.userName)
+        // 设置密码
+        user.setPassword(this.formData.userName)
+        user.signUp().then((loginedUser) => {
+          console.log(loginedUser)
+          // 如果注册成功
+          // 触发exitUp事件，更改App.vue组件的数据 -> class的改变
+          this.$emit('exitUp')
+          // 触发successInLean事件，更改更改App.vue组件的数据 -> 控制登录注册/登出的显示
+          this.$emit('successInLean')
+        }, (error) => {
+          alert('注册失败')
+        })
       }
     }
   }

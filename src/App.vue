@@ -1,13 +1,14 @@
 <template>
   <div id="app" :class="{isPreview:isPreview,isHide:isHide}">
-    <Topbar class="topbar" v-on:preview="preview" v-on:exitPreview="exitPreview" v-on:signUp="signUp"
-            v-on:login="login"/>
+    <Topbar class="topbar" v-bind:successInLeanCloud="successInLeanCloud" v-on:preview="preview"
+            v-on:exitPreview="exitPreview" v-on:signUp="signUp"
+            v-on:login="login" v-on:logout="logout"/>
     <main>
       <Editor v-bind:resume="resume" class="editor"/>
       <Preview v-bind:resume="resume" v-bind:value="resume.skillHistory.length" class="preview"/>
     </main>
-    <Login v-if="actionType === 'login'" v-on:exitUp="exitUp"/>
-    <Signup v-if="actionType === 'signUp'" v-on:exitUp="exitUp"/>
+    <Login v-if="actionType === 'login'" v-on:exitUp="exitUp" v-on:successInLean="successInLean"/>
+    <Signup v-if="actionType === 'signUp'" v-on:exitUp="exitUp" v-on:successInLean="successInLean"/>
   </div>
 </template>
 
@@ -17,13 +18,14 @@
   import Preview from './components/Preview'
   import Signup from './components/Signup'
   import Login from './components/Login'
-
+  import AV from 'leancloud-storage'
 
   export default {
     data() {
       return {
         isPreview: false,
         isHide: false,
+        successInLeanCloud: false,
         actionType: '',
         resume: {
           profile: {
@@ -108,6 +110,14 @@
       exitUp() {
         this.actionType = ''
         this.isHide = false
+      },
+      logout() {
+        this.successInLeanCloud = false
+        AV.User.logOut()
+        window.location.reload()
+      },
+      successInLean() {
+        this.successInLeanCloud = true
       }
     },
     components: {
@@ -151,7 +161,7 @@
   }
 
   .isHide {
-    main  {
+    main {
       display: none;
     }
   }

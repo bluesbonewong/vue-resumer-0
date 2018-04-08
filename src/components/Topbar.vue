@@ -10,8 +10,9 @@
         <p>sume</p></a>
     </div>
     <el-row class="actions">
-      <el-button type="primary" @click="signUp">注册</el-button>
-      <el-button type="primary" plain @click="login">登录</el-button>
+      <el-button type="primary" @click="signUp" v-if="!successInLeanCloud">注册</el-button>
+      <el-button type="primary" plain @click="login" v-if="!successInLeanCloud">登录</el-button>
+      <el-button type="primary" @click="logout" v-if="successInLeanCloud">注销</el-button>
       <el-button plain @click="preview">进行预览</el-button>
       <el-button plain @click="exitPreview">退出预览</el-button>
     </el-row>
@@ -20,6 +21,7 @@
 
 <script>
   export default {
+    props:['successInLeanCloud'],
     methods: {
       preview() {
         // 预览功能
@@ -30,12 +32,16 @@
         this.$emit('exitPreview')
       },
       signUp() {
-        //
+        // 注册功能
         this.$emit('signUp')
       },
       login() {
-        //
+        // 登录功能
         this.$emit('login')
+      },
+      logout(){
+        // 注销功能
+        this.$emit('logout')
       }
     }
   }
