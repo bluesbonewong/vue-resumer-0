@@ -10,6 +10,7 @@
 
 <script>
   import AV from 'leancloud-storage'
+  import { EventBus } from './eventBus.js';
 
   export default {
     data() {
@@ -29,6 +30,9 @@
           this.$emit('exitUp')
           // 触发successInLean事件
           this.$emit('successInLean')
+
+          // 触发Topbar里的fetchInfo事件
+          EventBus.$emit('fetchInfo')
         }, function (error) {
           alert('登录失败')
         })

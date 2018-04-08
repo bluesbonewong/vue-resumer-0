@@ -18,3 +18,14 @@ new Vue({
   components: {App},
   template: '<App />'
 })
+
+const EventBus = new Vue()
+
+// 添加到全局的 Vue 对象
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get() {
+      return EventBus
+    }
+  }
+})

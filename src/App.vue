@@ -1,8 +1,16 @@
 <template>
   <div id="app" :class="{isPreview:isPreview,isHide:isHide}">
-    <Topbar class="topbar" v-bind:successInLeanCloud="successInLeanCloud" v-on:preview="preview"
-            v-on:exitPreview="exitPreview" v-on:signUp="signUp"
-            v-on:login="login" v-on:logout="logout"/>
+    <Topbar class="topbar"
+            v-bind:resume="resume"
+            v-bind:successInLeanCloud="successInLeanCloud"
+            v-on:preview="preview"
+            v-on:exitPreview="exitPreview"
+            v-on:signUp="signUp"
+            v-on:login="login"
+            v-on:logout="logout"
+            v-on:successInLean="successInLean"
+            v-on:setResumeId="setResumeId"
+            v-on:replaceResumeData="replaceResumeData"/>
     <main>
       <Editor v-bind:resume="resume" class="editor"/>
       <Preview v-bind:resume="resume" v-bind:value="resume.skillHistory.length" class="preview"/>
@@ -28,6 +36,7 @@
         successInLeanCloud: false,
         actionType: '',
         resume: {
+          userId: '',
           profile: {
             photoLink: 'https://s1.ax1x.com/2018/04/07/CPKfxO.jpg',
             name: '大汪',
@@ -118,6 +127,15 @@
       },
       successInLean() {
         this.successInLeanCloud = true
+      },
+      setResumeId() {
+        // 将储存的数据与用户关联起来 —— 使用id绑定的方式
+        this.resume.userId = arguments[0]
+      },
+      replaceResumeData() {
+        // 取到leancloud当前用户的数据，并替换本地数据
+        this.resume = arguments[0]
+        this.resume.userId = arguments[1]
       }
     },
     components: {
