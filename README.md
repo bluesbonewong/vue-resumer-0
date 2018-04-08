@@ -15,7 +15,7 @@ Normalize.css
 
 ## 其它的话
 #### Coding & Design By Bluesbonewong
-博客地址：[个人技术博客](https://segmentfault.com/blog/fontendbbw)  
+博客地址：[个人技术博客](https://segmentfault.com/blog/fontendbbw)
 Github地址：https://github.com/bluesbonewong
 
 #### Thanks For Using
